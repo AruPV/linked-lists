@@ -1,0 +1,1 @@
+/usr/bin/c++  -fcoroutines -fexceptions -O0 -std=c++20 CMakeFiles/tests.dir/test/gtest.cpp.o -o bin/tests  lib/libgtest_main.a lib/libgtest.a 
