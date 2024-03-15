@@ -60,21 +60,21 @@ TEST_F(LinkedListTest, AddLeftToEmpty){
 }
 
 TEST_F(LinkedListTest, AddLeftToOnceAdded){
-	auto temp = size_one_list.getTail(); 
+	auto temp = size_one_list.getHead(); 
 	size_one_list.addLeft(2);
-	EXPECT_EQ(size_one_list.getTail()->next, temp);
+	EXPECT_EQ(size_one_list.getHead()->next, temp);
 }
 
 TEST_F(LinkedListTest, AddLeftToTwiceAdded){
-	auto temp = size_two_list.getTail(); 
+	auto temp = size_two_list.getHead(); 
 	size_two_list.addLeft(3);
-	EXPECT_EQ(size_two_list.getTail()->next, temp);
+	EXPECT_EQ(size_two_list.getHead()->next, temp);
 }
 
 TEST_F(LinkedListTest, AddLeftToManyAdded){
-	auto temp = big_list.getTail(); 
+	auto temp = big_list.getHead(); 
 	big_list.addLeft(3);
-	EXPECT_EQ(big_list.getTail()->next, temp);
+	EXPECT_EQ(big_list.getHead()->next, temp);
 }
 
 //Add right tests
@@ -84,24 +84,24 @@ TEST_F(LinkedListTest, AddRightToEmpty){
 }
 
 TEST_F(LinkedListTest, AddRightToOnceAdded){
-	auto temp = size_one_list.getHead(); 
-	EXPECT_EQ(size_one_list.getHead(), temp);
+	auto temp = size_one_list.getTail(); 
+	EXPECT_EQ(size_one_list.getTail(), temp);
 	size_one_list.addRight(2);
-	EXPECT_EQ(temp->next, size_one_list.getHead());
+	EXPECT_EQ(temp->next, size_one_list.getTail());
 }
 
 TEST_F(LinkedListTest, AddRightToTwiceAdded){
-	auto temp = size_two_list.getHead(); 
-	EXPECT_EQ(size_two_list.getHead(), temp);
+	auto temp = size_two_list.getTail(); 
+	EXPECT_EQ(size_two_list.getTail(), temp);
 	size_two_list.addRight(3);
-	EXPECT_EQ(temp->next, size_two_list.getHead());
+	EXPECT_EQ(temp->next, size_two_list.getTail());
 }
 
 TEST_F(LinkedListTest, AddRightToManyAdded){
-	auto temp = big_list.getHead(); 
-	EXPECT_EQ(big_list.getHead(), temp);
+	auto temp = big_list.getTail(); 
+	EXPECT_EQ(big_list.getTail(), temp);
 	big_list.addRight(3);
-	EXPECT_EQ(temp->next, big_list.getHead());
+	EXPECT_EQ(temp->next, big_list.getTail());
 }
 
 //Test ToString
@@ -131,17 +131,17 @@ TEST_F(LinkedListTest, RemoveLeftOne){
 }
 
 TEST_F(LinkedListTest, RemoveLeftTwo){
-	Node<int>* new_tail = size_two_list.getTail()->next;
+	Node<int>* new_head = size_two_list.getHead()->next;
 	size_two_list.removeLeft();
 	EXPECT_EQ(size_two_list.getTail(), size_two_list.getHead());
-	EXPECT_EQ(size_two_list.getTail(), new_tail);
+	EXPECT_EQ(size_two_list.getHead(), new_head);
 }
 
 TEST_F(LinkedListTest, RemoveLeftMany){
-	Node<int>* new_tail = big_list.getTail()->next;
+	Node<int>* new_head = big_list.getHead()->next;
 	big_list.removeLeft();
-	EXPECT_NE(big_list.getTail(), big_list.getHead());
-	EXPECT_EQ(big_list.getTail(), new_tail);
+	EXPECT_NE(big_list.getHead(), big_list.getTail());
+	EXPECT_EQ(big_list.getHead(), new_head);
 }
 
 //Test RemoveRight
@@ -152,21 +152,21 @@ TEST_F(LinkedListTest, RemoveRightEmpty){
 TEST_F(LinkedListTest, RemoveRightOne){
 	size_one_list.removeRight();
 	EXPECT_EQ(size_one_list.getTail(), size_one_list.getHead());
-	EXPECT_EQ(nullptr, size_one_list.getHead());
+	EXPECT_EQ(nullptr, size_one_list.getTail());
 	EXPECT_THROW(empty_list.removeRight(), std::length_error);
 }
 
 TEST_F(LinkedListTest, RemoveRightTwo){
-	int old_head_value = size_two_list.getHead()->data;
-	EXPECT_EQ(size_two_list.removeRight(), old_head_value);
+	int old_tail_value = size_two_list.getTail()->data;
+	EXPECT_EQ(size_two_list.removeRight(), old_tail_value);
 	EXPECT_EQ(size_two_list.getHead(), size_two_list.getTail());
-	EXPECT_EQ(size_two_list.getHead()->data, 2); 
+	EXPECT_EQ(size_two_list.getTail()->data, 2); 
 }
 
 TEST_F(LinkedListTest, RemoveRightMany){
 	EXPECT_EQ(big_list.removeRight(), 0);
 	EXPECT_EQ(big_list.removeRight(), 1);
 	EXPECT_NE(big_list.getTail(), big_list.getHead());
-	EXPECT_EQ(big_list.getHead()->data, 2); 
+	EXPECT_EQ(big_list.getTail()->data, 2); 
 }
 

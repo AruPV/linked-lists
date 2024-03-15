@@ -37,8 +37,8 @@ class LinkedList{
 				return;
 			}
 			size ++;
-			new_node -> next = tail;
-			tail = new_node;
+			new_node -> next = head;
+			head = new_node;
 		}
 
 		void addRight(T value){
@@ -50,19 +50,19 @@ class LinkedList{
 				return;
 			}
 			size ++;
-			head->next = new_node;
-			head = new_node;
+			tail->next = new_node;
+			tail = new_node;
 		}
 		
 		T removeLeft(){
 			if (size == 0){
 				throw std::length_error("Cannot remove from an empty list");
 			}
-			if (size == 1){head = nullptr;}
-			T        return_data  = tail->data;
-			Node<T>& new_tail	  = *tail->next;
-			delete tail;
-			tail = &new_tail;
+			if (size == 1){tail = nullptr;}
+			T        return_data  = head->data;
+			Node<T>& new_head	  = *head->next;
+			delete head;
+			head = &new_head;
 			size --;
 			return return_data;
 		}	
@@ -71,20 +71,20 @@ class LinkedList{
 			if (size == 0){
 				throw std::length_error("Cannot remove from an empty list");
 			}
-			T        return_data  = head->data;
+			T        return_data  = tail->data;
 			if (size == 1){
-				delete head;
+				delete tail;
 				head = nullptr;
 				tail = nullptr;
 				return return_data;
 			}
-			Node<T>* new_head_ptr = tail;
-			while (new_head_ptr->next != head){
-				new_head_ptr = new_head_ptr->next;
+			Node<T>* new_tail_ptr = head;
+			while (new_tail_ptr->next != tail){
+				new_tail_ptr = new_tail_ptr->next;
 			}
-			delete head;
-			head = new_head_ptr;
-			new_head_ptr->next = nullptr;
+			delete tail;
+			tail = new_tail_ptr;
+			new_tail_ptr->next = nullptr;
 			size --;
 			return return_data;
 		}	
@@ -92,7 +92,7 @@ class LinkedList{
 		std::string toString(){ 
 			if (size == 0){return std::string("EMPTY");}
 			std::string return_string = "head";
-			Node<T>* cur_node = tail;
+			Node<T>* cur_node = head;
 			while (cur_node != nullptr){
 				return_string += "->[" + cur_node->toString() + "]";
 				cur_node = cur_node->next;
